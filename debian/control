@@ -1,0 +1,13 @@
+Source: chimerascan0.4.5
+Section: science
+Priority: optional
+Build-Depends: zlib1g-dev, python-dev
+Build-Depends-Indep: python
+Maintainer: Matthew Iyer <matthew.iyer@gmail.com>
+Standards-Version: 3.8.3
+Homepage: http://code.google.com/p/chimerascan/
+
+Package: chimerascan0.4.5
+Architecture: amd64
+Depends: python, zlib1g-dev
+Description: chimerascan is a software package that detects gene fusions in paired-end RNA sequencing (RNA-Seq) datasets. 

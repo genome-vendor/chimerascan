@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "configure" ]; then
+    if [ ! -e /usr/bin/chimerascan_run ]; then
+	update-alternatives --install /usr/bin/chimerascan_html_table.py chimerascan_html_table.py /usr/bin/chimerascan_html_table.py0.4.5 1
+	update-alternatives --install /usr/bin/chimerascan_index.py chimerascan_index.py /usr/bin/chimerascan_index.py0.4.5 1
+	update-alternatives --install /usr/bin/chimerascan_run.py chimerascan_run.py /usr/bin/chimerascan_run.py0.4.5 1
+	update-alternatives --install /usr/bin/gtf_to_genepred.py gtf_to_genepred.py /usr/bin/gtf_to_genepred.py0.4.5 1 
+	update-alternatives --install /usr/bin/make_false_positive_file.py make_false_positive_file /usr/bin/make_false_positive_file.py0.4.5 1
+    fi
+fi

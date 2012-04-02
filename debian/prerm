@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+
+if [ \( "$1" = "upgrade" -o "$1" = "remove" \) -a -L /usr/bin/chimerascan_run.py ]; then
+	update-alternatives --remove chimerascan_html_table.py /usr/bin/chimerascan_html_table.py0.4.5
+	update-alternatives --remove chimerascan_index.py /usr/bin/chimerascan_index.py0.4.5
+	update-alternatives --remove chimerascan_run.py /usr/bin/chimerascan_run.py0.4.5
+	update-alternatives --remove gtf_to_genepred.py /usr/bin/gtf_to_genepred.py0.4.5
+	update-alternatives --remove make_false_positive_file /usr/bin/make_false_positive_file.py0.4.5
+fi

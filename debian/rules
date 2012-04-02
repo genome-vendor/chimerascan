@@ -1,0 +1,21 @@
+#!/usr/bin/make -f
+
+PKG=chimerascan0.4.5
+VER=0.4.5
+DEB_DIR=debian/${PKG}
+
+%:
+	dh $@
+
+override_dh_auto_install:
+#	dh_auto_install
+	echo "copy files now!"
+	mkdir -p ${DEB_DIR}/usr/lib/${PKG}/bin
+	mkdir -p ${DEB_DIR}/usr/bin
+	python setup.py install --prefix=${DEB_DIR}/usr/lib/${PKG}
+	for filename in 'chimerascan_html_table.py' 'chimerascan_index.py' 'chimerascan_run.py' 'gtf_to_genepred.py' 'make_false_positive_file.py'; do \
+		echo "export PYTHONPATH=/usr/lib/${PKG}/lib/python2.6/site-packages/:\$$PYTHONPATH; export PATH=/usr/lib/${PKG}/bin:\$$PATH; exec $$filename \"\$$@\"" > ${DEB_DIR}/usr/bin/$${filename}${VER}; \
+		done
+
+
+
