@@ -1,21 +1,29 @@
 #!/usr/bin/make -f
 
-PKG=chimerascan0.4.5
+PRG=chimerascan
 VER=0.4.5
-DEB_DIR=debian/${PKG}
+PKG=$(PRG)$(VER)
+DEB_DIR=debian/$(PKG)
+PKG_LIB_DIR=/usr/lib/$(PKG)
+BIN_LIST=chimerascan_html_table.py \
+         chimerascan_index.py \
+         chimerascan_run.py \
+         gtf_to_genepred.py \
+         make_false_positive_file.py
 
 %:
 	dh $@
 
 override_dh_auto_install:
-#	dh_auto_install
-	echo "copy files now!"
-	mkdir -p ${DEB_DIR}/usr/lib/${PKG}/bin
-	mkdir -p ${DEB_DIR}/usr/bin
-	python setup.py install --prefix=${DEB_DIR}/usr/lib/${PKG}
-	for filename in 'chimerascan_html_table.py' 'chimerascan_index.py' 'chimerascan_run.py' 'gtf_to_genepred.py' 'make_false_positive_file.py'; do \
-		echo "export PYTHONPATH=/usr/lib/${PKG}/lib/python2.6/site-packages/:\$$PYTHONPATH; export PATH=/usr/lib/${PKG}/bin:\$$PATH; exec $$filename \"\$$@\"" > ${DEB_DIR}/usr/bin/$${filename}${VER}; \
-		done
-
-
-
+	mkdir -p $(DEB_DIR)/usr/bin $(DEB_DIR)$(PKG_LIB_DIR)/bin
+	python setup.py install --prefix=$(DEB_DIR)$(PKG_LIB_DIR)
+	for BIN in $(BIN_LIST); do \
+	echo 'This line is here because install bugs out if it is first command!'\
+	install -m755 $${BIN} $(DEB_DIR)$(PKG_LIB_DIR)/bin/$${BIN}\
+	echo \
+	'#!/bin/sh\n'\
+	'export PYTHONPATH=$(PKG_LIB_DIR)/lib/python2.6/site-packages:$$PYTHONPATH\n'\
+	'export PATH=$(PKG_LIB_DIR)/bin:$$PATH\n'\
+	'exec' "$${BIN}" '"$$@"'\
+	> $(DEB_DIR)/usr/bin/$${BIN}$(VER);\
+	done
