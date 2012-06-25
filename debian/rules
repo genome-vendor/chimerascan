@@ -12,6 +12,7 @@ DEB_DIR=debian/$(PKG)
 PKG_LIB_DIR=/usr/lib/$(PKG)
 BIN_WRAPPER=\
 '\#!/bin/sh\n'\
+'export PYTHONPATH=$(PKG_LIB_DIR)/lib/python2.6/site-packages:$$PYTHONPATH\n'\
 'export PATH=$(PKG_LIB_DIR)/bin:$$PATH\n'\
 "exec $${BASE_BIN}" '"$$@"'
 
