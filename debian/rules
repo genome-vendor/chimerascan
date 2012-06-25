@@ -27,3 +27,6 @@ override_dh_auto_install:
 	'exec' "$${BIN}" '"$$@"'\
 	> $(DEB_DIR)/usr/bin/$${BIN}$(VER);\
 	done
+
+override_dh_strip:
+	echo "Do not create a *dbgsym*.ddeb package."
