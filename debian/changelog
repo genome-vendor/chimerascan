@@ -1,6 +1,7 @@
 chimerascan0.4.5 (0.4.5-2) lucid; urgency=low
 
   * cleaned up rules and fixed /usr/bin/*
+  * added debhelper build dependency
 
  -- Nathaniel Nutter <nnutter@genome.wustl.edu>  Thu, 21 Jun 2012 18:09:01 -0500
 

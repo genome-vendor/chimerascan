@@ -1,7 +1,7 @@
 Source: chimerascan0.4.5
 Section: science
 Priority: optional
-Build-Depends: zlib1g-dev, python-dev
+Build-Depends: debhelper (>= 7), zlib1g-dev, python-dev
 Build-Depends-Indep: python
 Maintainer: Matthew Iyer <matthew.iyer@gmail.com>
 Standards-Version: 3.8.3
